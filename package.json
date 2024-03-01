@@ -1,0 +1,8 @@
+{
+	"dependencies": {
+		"glob": "^7.1.6"
+	},
+	"volta": {
+		"node": "16.20.2"
+	}
+}
