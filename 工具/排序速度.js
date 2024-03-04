@@ -5,14 +5,10 @@ const fs = require("fs");
 const path = require("path");
 const random = require("./随机数");
 const swap = require("./交换");
-const { log } = require("console");
 
 function testSort(sortFnList, arr) {
-  // if (typeof sortFn != "function") {
-  //   throw new Error("sortFn需要传函数");
-  // }
-  console.log(sortFnList);
   sortFnList.forEach(sortFn => {
+    if (typeof sortFn !== "function") throw new Error("参数错误");
     let startTime = new Date().getTime();
     sortFn(arr);
     let endTime = new Date();
@@ -30,7 +26,7 @@ function randomArr(count) {
   return arr;
 }
 
-// 大量重复数据数组
+// 近乎有序的数组
 function nearlyArr(count, swapTime) {
   const arr = [];
   for (let i = 0; i < count; i++) {
@@ -64,6 +60,7 @@ function isSorted(arr) {
   }
   return true;
 }
+// 读取排序文件
 function readSortFile() {
   const directoryPath = "../排序";
   fs.readdir(directoryPath, function (err, files) {
@@ -75,7 +72,7 @@ function readSortFile() {
       jsFiles.forEach(file => {
         sortFunction.push(require(directoryPath + "/" + file));
       });
-      testSort(sortFunction, randomRangeArr(30000, 0, 100));
+      testSort(sortFunction, randomRangeArr(30000, 0, 10));
     }
   });
 }
