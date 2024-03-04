@@ -7,6 +7,6 @@ function insertSort(arr) {
     }
   }
 }
-
+console.log("成功了");
 insertSort.sortName = "插入排序";
-module.exports = insertSort; 
+module.exports = insertSort;
