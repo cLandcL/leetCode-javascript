@@ -19,29 +19,29 @@ function _mergeSort(arr) {
 }
 function mergeSort(arr, left, right) {
   // 分
+  // 优化--元素个数小于某个值的时候使用插入排序
   if (left >= right) return; //当前数据为空
   let mid = Math.floor((left + right) / 2);
   mergeSort(arr, left, mid);
   mergeSort(arr, mid + 1, right);
   // 合
-  merge(arr, left, mid, right);
-  return arr;
+  if (arr[mid] > arr[mid + 1]) merge(arr, left, mid, right);
 }
-
 // [left...mid]和 [mid+1...right]两部分合并
 function merge(arr, left, mid, right) {
   let tempArr = [];
   for (let i = left; i <= right; i++) {
     tempArr[i - left] = arr[i];
   }
-//   console.log(tempArr);
   let i = left,
     j = mid + 1;
   for (let k = left; k <= right; k++) {
     if (i > mid) {
+      //左数组的位置大于mid，说明右边的数组没有归并完
       arr[k] = tempArr[j - left];
       j++;
-    } else if (j > right) {
+    } else if (j > right) { 
+      //右边数组的位置大于right，说明左边的数组没有归并完
       arr[k] = tempArr[i - left];
       i++;
     } else if (tempArr[i - left] < tempArr[j - left]) {
@@ -53,7 +53,8 @@ function merge(arr, left, mid, right) {
     }
   }
 }
-_mergeSort(arr);
-console.log(_mergeSort(arr));
 _mergeSort.sortName = "归并排序";
 module.exports = _mergeSort;
+
+// 自底向上的归并排序
+

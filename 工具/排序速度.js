@@ -72,7 +72,7 @@ function readSortFile() {
       jsFiles.forEach(file => {
         sortFunction.push(require(directoryPath + "/" + file));
       });
-      testSort(sortFunction, randomRangeArr(30000, 0, 10));
+      testSort(sortFunction, randomRangeArr(20000, 0, 10));
     }
   });
 }
