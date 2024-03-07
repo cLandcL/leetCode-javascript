@@ -40,7 +40,6 @@ function nearlyArr(count, swapTime) {
   }
   return arr;
 }
-
 // 随机范围内数组
 function randomRangeArr(count, min, max) {
   const arr = [];
@@ -72,7 +71,9 @@ function readSortFile() {
       jsFiles.forEach(file => {
         sortFunction.push(require(directoryPath + "/" + file));
       });
-      testSort(sortFunction, randomRangeArr(20000, 0, 10));
+      testSort(sortFunction, randomArr(100000, 0, 10));
+      testSort(sortFunction, nearlyArr(100000, 10));
+      testSort(sortFunction, randomRangeArr(100000, 0, 100));
     }
   });
 }
