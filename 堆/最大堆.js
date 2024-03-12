@@ -29,6 +29,7 @@ class MaxHeap {
         j = 2 * k - 1;
       }
       if (j <= len && this.#data[j] < this.#data[j + 1]) {
+        // console.log("j:", j, "data[j]:", this.#data[j], "data[j+1]:", this.#data[j + 1]);
         j = j + 1;
       }
       if (this.#data[k] >= this.#data[j]) break;
@@ -48,6 +49,7 @@ class MaxHeap {
   getData() {
     return this.#data;
   }
+  // 插入元素
   insert(item) {
     this.#data.push(item);
     this.#shiftUp(this.#data.length - 1);
@@ -59,11 +61,17 @@ class MaxHeap {
     this.#shiftDown(0);
     return result;
   }
+  turnHeap() {
+    // 将数组整合成堆
+    for (let i = Math.floor(this.#data.length / 2) - 1; i >= 0; i--) {
+      this.#shiftDown(i);
+    }
+    return this.#data;
+  }
 }
 // 数组从0开始--2i 2i-1（左） 2i（右）
-const heap = new MaxHeap([62, 41, 30, 28, 16, 13, 19, 17, 15]);
-// [15,41, 30, 28, 16, 13, 19, 17]
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.getData());
+// const heap = new MaxHeap();
+const heap = new MaxHeap();
+// console.log(heap.turnHeap());
+module.exports = MaxHeap;
 // 新插入的元素与父节点进行比较
