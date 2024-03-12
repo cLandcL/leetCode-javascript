@@ -13,7 +13,27 @@ class MaxHeap {
     while (k > 0 && this.#data[k] > this.#data[Math.ceil(k / 2) - 1]) {
       swap(this.#data, k, Math.ceil(k / 2) - 1);
       k = Math.ceil(k / 2) - 1;
-      console.log(k, this.#data[Math.ceil(k / 2) - 1]);
+    }
+  }
+  #shiftDown(k) {
+    // 1.删除根结点的元素，将最后一个元素放到根结点的位置
+    // 2.比较左右节点（将左右节点中大的元素与根结点进行替换）
+    // 向下移动父节点
+    // 完全二叉树中必定有左孩子
+    let len = this.#data.length - 1;
+    while (2 * k <= len) {
+      let j;
+      if (2 * k == 0) {
+        j = 0;
+      } else {
+        j = 2 * k - 1;
+      }
+      if (j <= len && this.#data[j] < this.#data[j + 1]) {
+        j = j + 1;
+      }
+      if (this.#data[k] >= this.#data[j]) break;
+      swap(this.#data, k, j);
+      k = j;
     }
   }
   constructor(data) {
@@ -32,9 +52,18 @@ class MaxHeap {
     this.#data.push(item);
     this.#shiftUp(this.#data.length - 1);
   }
+  extractMax() {
+    let result = this.#data[0];
+    swap(this.#data, 0, this.#data.length - 1);
+    this.#data.pop();
+    this.#shiftDown(0);
+    return result;
+  }
 }
 // 数组从0开始--2i 2i-1（左） 2i（右）
-const heap = new MaxHeap([62, 41, 30, 28, 16, 22, 13, 19, 17, 15]);
-heap.insert(52);
+const heap = new MaxHeap([62, 41, 30, 28, 16, 13, 19, 17, 15]);
+// [15,41, 30, 28, 16, 13, 19, 17]
+console.log(heap.extractMax());
+console.log(heap.extractMax());
 console.log(heap.getData());
 // 新插入的元素与父节点进行比较
