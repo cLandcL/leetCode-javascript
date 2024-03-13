@@ -29,7 +29,6 @@ class MaxHeap {
         j = 2 * k - 1;
       }
       if (j <= len && this.#data[j] < this.#data[j + 1]) {
-        // console.log("j:", j, "data[j]:", this.#data[j], "data[j+1]:", this.#data[j + 1]);
         j = j + 1;
       }
       if (this.#data[k] >= this.#data[j]) break;
